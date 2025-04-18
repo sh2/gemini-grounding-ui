@@ -47,7 +47,7 @@ def main():
 
         # Generate content
         response_stream = client.models.generate_content_stream(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash-preview-04-17",
             contents=contents,
             config=GenerateContentConfig(
                 tools=[Tool(google_search=GoogleSearch())]) if use_config else None
