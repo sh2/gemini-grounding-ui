@@ -7,6 +7,7 @@ from google.genai.types import Content, GenerateContentConfig, GoogleSearch, Par
 
 def main():
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
+    st.set_page_config(page_title="Gemini Grounding UI")
     st.title("Gemini Grounding UI")
 
     model_options = [
@@ -41,7 +42,7 @@ def main():
     # Chat input
     if message_user := st.chat_input("Ask a question"):
         st.session_state.messages.append({
-            "content": Content(role="user", parts=[Part.from_text(message_user)]),
+            "content": Content(role="user", parts=[Part.from_text(text=message_user)]),
             "grounding_links": "",
             "grounding_queries": ""
         })
@@ -73,7 +74,9 @@ def main():
 
             if response_chunk.text:
                 response_text += response_chunk.text
-                message_assistant.markdown(response_text)
+                message_assistant.markdown(response_text + "▌")
+
+        message_assistant.markdown(response_text)
 
         # Display grounding metadata
         if response and response.candidates and response.candidates[0].grounding_metadata:
@@ -93,7 +96,7 @@ def main():
 
         # Append response to chat history
         st.session_state.messages.append({
-            "content": Content(role="model", parts=[Part.from_text(response_text)]),
+            "content": Content(role="model", parts=[Part.from_text(text=response_text)]),
             "grounding_links": grounding_links,
             "grounding_queries": grounding_queries
         })
