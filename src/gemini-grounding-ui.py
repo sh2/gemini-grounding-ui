@@ -7,10 +7,20 @@ from google.genai.types import Content, GenerateContentConfig, GoogleSearch, Par
 
 def main():
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
-
     st.title("Gemini Grounding UI")
-    clear = st.button("Clear Chat History")
+
+    model_options = [
+        "gemini-2.5-pro",
+        "gemini-2.5-flash"
+    ]
+
+    model_id = st.selectbox("Language model", model_options, index=1)
+
+    if not model_id:
+        model_id = model_options[1]
+
     use_config = st.checkbox("Use Grounding", value=True)
+    clear = st.button("Clear Chat History")
 
     if clear or "messages" not in st.session_state:
         st.session_state.messages = []
@@ -47,7 +57,7 @@ def main():
 
         # Generate content
         response_stream = client.models.generate_content_stream(
-            model="gemini-2.5-flash",
+            model=model_id,
             contents=contents,
             config=GenerateContentConfig(
                 tools=[Tool(google_search=GoogleSearch())]) if use_config else None
