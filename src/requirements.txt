@@ -1,5 +1,6 @@
 altair==5.5.0
 annotated-types==0.7.0
+anyio==4.9.0
 attrs==24.3.0
 blinker==1.9.0
 cachetools==5.5.0
@@ -9,7 +10,10 @@ click==8.1.8
 gitdb==4.0.12
 GitPython==3.1.44
 google-auth==2.37.0
-google-genai==0.3.0
+google-genai==1.23.0
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
 idna==3.10
 Jinja2==3.1.5
 jsonschema==4.23.0
@@ -39,8 +43,9 @@ rpds-py==0.22.3
 rsa==4.9
 six==1.17.0
 smmap==5.0.2
-streamlit==1.41.1
-tenacity==9.0.0
+sniffio==1.3.1
+streamlit==1.46.1
+tenacity==8.5.0
 toml==0.10.2
 tornado==6.4.2
 typing_extensions==4.12.2

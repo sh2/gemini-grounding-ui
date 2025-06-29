@@ -1,4 +1,4 @@
 # Package List
 
-- google.genai
+- google-genai
 - streamlit
